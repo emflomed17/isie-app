@@ -11,11 +11,13 @@ import {
   Stack,
 } from "react-bootstrap";
 import SidebarMobile from "./SidebarMobile";
+import QuestionPreview from "../QuestionPreview/QuestionPreview";
+import QuestionList from "../QuestionList/QuestionList";
 
 const Sidebar = () => {
   return (
     <Col md={6} className="sidebar bg-dark">
-      <Stack direction="horizontal" gap={2}>
+      <Stack direction="horizontal" gap={2} className="p-2">
         <Button
           variant="outline-light"
           className="custom-button new-chat-btn d-none d-md-flex mt-3"
@@ -24,16 +26,13 @@ const Sidebar = () => {
         </Button>
         <Button
           variant="outline-light"
-          className="custom-button d-none d-md-flex mt-3 p-2"
+          className="custom-button d-none d-md-flex mt-3"
         >
           <i className="fa fa-plus mt-1 "></i>
         </Button>
       </Stack>
-      <Nav className="flex-column d-none d-md-flex">
-        <Nav.Link href="#">Link 1</Nav.Link>
-        <Nav.Link href="#">Link 2</Nav.Link>
-        <Nav.Link href="#">Link 3</Nav.Link>
-      </Nav>
+
+      <QuestionList />
 
       <SidebarMobile />
     </Col>
