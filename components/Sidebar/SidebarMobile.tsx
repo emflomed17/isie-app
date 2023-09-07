@@ -1,5 +1,7 @@
+"use client";
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
+import { BsList } from "react-icons/bs";
 import Offcanvas from "react-bootstrap/Offcanvas";
 
 const SidebarMobile: React.FC = () => {
@@ -13,9 +15,9 @@ const SidebarMobile: React.FC = () => {
       <Button
         variant="outline-light"
         onClick={toggleShow}
-        className="custom-button me-2 d-md-none"
+        className="custom-button me-2 d-md-none mb-2"
       >
-        <i className="fa fa-bars mt-1 "></i>
+        <BsList size="20px" />
       </Button>
       <Offcanvas show={show} onHide={handleClose}>
         <Offcanvas.Header closeButton className="bg-dark">

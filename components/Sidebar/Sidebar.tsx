@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import Link from "next/link";
-import Col from "react-bootstrap/Col";
+import { BsLayoutSidebar, BsPlus } from "react-icons/bs";
 import {
   Button,
+  Col,
   Container,
   Form,
   Nav,
   Navbar,
   Row,
   Stack,
-} from "react-bootstrap";
+} from "../../lib/react-bootstrap";
 import SidebarMobile from "./SidebarMobile";
 import QuestionPreview from "../QuestionPreview/QuestionPreview";
 import QuestionList from "../QuestionList/QuestionList";
@@ -22,13 +23,13 @@ const Sidebar = () => {
           variant="outline-light"
           className="custom-button new-chat-btn d-none d-md-flex mt-3"
         >
-          <i className="fa fa-plus mt-1"></i>&nbsp; New Chat
+          <BsPlus size="20px" /> &nbsp; New Chat
         </Button>
         <Button
           variant="outline-light"
           className="custom-button d-none d-md-flex mt-3"
         >
-          <i className="fa fa-plus mt-1 "></i>
+          <BsLayoutSidebar size="20px" />
         </Button>
       </Stack>
 
