@@ -9,6 +9,11 @@ import { Col, Container, Row, SSRProvider } from "../lib/react-bootstrap";
 import { Roboto } from "next/font/google";
 import { Metadata } from "next";
 
+import QuickQuestions from "@/components/QuickQuestions/QuickQuestions";
+import UserInput from "@/components/UserInput/UserInput";
+import Message from "@/components/Message/Message";
+import MessageList from "@/components/MessageList/MessageList";
+
 export const metadata: Metadata = {
   title: "Chat App",
   description: "Nextjs",
@@ -24,6 +29,8 @@ const roboto = Roboto({
   subsets: ["latin"],
 });
 
+const isNewConversation = false;
+
 const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
   return (
     <html>
@@ -32,24 +39,21 @@ const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
           <Container as="main" fluid>
             <Row>
               <Sidebar />
-              <Col md={6} className="main-content">
-                <Header />
-
-                <h1>Build Bootstrap with React and Next</h1>
-
-                <ExampleComponents />
-
-                <hr className="col-1 my-5 mx-0" />
-
-                <AppGuides />
-                <AppGuides />
-                <Footer />
+              <Col className="main-container">
+                {/* {children} */}
+                {!isNewConversation && (
+                  <>
+                    <MessageList />
+                  </>
+                )}
+                <div className="bottom-container">
+                  {isNewConversation && <QuickQuestions />}
+                  <UserInput />
+                </div>
               </Col>
             </Row>
           </Container>
         </>
-        {/* {children}
-        <Link href="/about">About</Link> */}
       </body>
     </html>
   );

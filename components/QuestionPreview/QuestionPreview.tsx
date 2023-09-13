@@ -1,4 +1,5 @@
 import React from "react";
+import { BsChatLeft } from "react-icons/bs";
 
 interface QuestionPreviewProps {
   id: string;
@@ -9,7 +10,7 @@ interface QuestionPreviewProps {
 const QuestionPreview = ({ id, title, isActive }: QuestionPreviewProps) => {
   return (
     <div className="question-overview">
-      <i className="fa fa-comment-o mt-1"></i>&nbsp;&nbsp;{title}
+      <BsChatLeft /> &nbsp;&nbsp;{title}
     </div>
   );
 };
