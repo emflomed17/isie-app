@@ -13,7 +13,7 @@ import { BsSendFill } from "react-icons/bs";
 const UserInput = () => {
   return (
     <Form>
-      <FormGroup className="mb-3" controlId="formBasicEmail">
+      <FormGroup controlId="formBasicEmail">
         <div className="input-group input-chat">
           <FormControl
             type="text"

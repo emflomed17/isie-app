@@ -22,21 +22,26 @@ body {
 }
 
 .main-container {
-  display: flex;
-  flex-direction: column;
-
+  height: 100vh;
+  overflow: auto;
   min-height: 100vh;
   background-color: rgba(52, 53, 65, 1);
 }
 
-.bottom-container {
+.messages-container {
+  overflow: auto;
+  height: calc(100vh - 55px);
+}
+
+.user-input-container {
   position: fixed;
-  bottom: 0;
   display: flex;
-  flex-direction: column;
-  align-self: center;
-  width: 100%;
-  max-width: 800px;
+  justify-content: center;
+  background-color: transparent;
+  height: 105px;
+  bottom: 0;
+  left: 260px;
+  right: 0px;
 }
 
 .sidebar {
@@ -157,12 +162,6 @@ body {
   padding-left: 8px;
 }
 
-.messages-container {
-  width: 100%;
-  overflow: scroll;
-  padding-bottom: 40px;
-}
-
 .copyright-text {
   color: #fff;
   font-size: 10px;
@@ -170,38 +169,51 @@ body {
   padding: 8px;
 }
 
+.empty-space {
+  height: 80px;
+}
+
 @media (max-width: 767px) {
   .sidebar {
     width: 100%;
-    padding: 16px 8px;
   }
-}
-
-@media (min-width: 765px) and (max-width: 1024px) {
-  .bottom-container {
-    max-width: 550px;
-    // max-width: -webkit-fill-available;
+  .user-input-container {
+    left: 0px;
   }
-}
-
-/* Apply styles for width less than or equal to 600px */
-@media (max-width: 767px) {
   .messages-container {
-    height: 770px;
+    height: calc(100vh - 120px);
+  }
+  .input-chat {
+    // box-shadow: none;
+    background-color: rgba(52, 53, 65, 1);
   }
 }
 
-/* Apply styles for width between 601px and 1024px */
-@media (min-width: 767px) and (max-width: 1024px) {
-  .messages-container {
-    height: 890px;
-    padding-bottom: 80px;
-  }
-}
+// @media (min-width: 765px) and (max-width: 1024px) {
+//   .bottom-container {
+//     max-width: 550px;
+//     // max-width: -webkit-fill-available;
+//   }
+// }
 
-/* Apply styles for width greater than or equal to 1025px */
-@media (min-width: 1025px) {
-  .messages-container {
-    height: 900px;
-  }
-}
+// /* Apply styles for width less than or equal to 600px */
+// @media (max-width: 767px) {
+//   .messages-container {
+//     height: 770px;
+//   }
+// }
+
+// /* Apply styles for width between 601px and 1024px */
+// @media (min-width: 767px) and (max-width: 1024px) {
+//   .messages-container {
+//     height: 890px;
+//     padding-bottom: 80px;
+//   }
+// }
+
+// /* Apply styles for width greater than or equal to 1025px */
+// @media (min-width: 1025px) {
+//   .messages-container {
+//     height: 900px;
+//   }
+// }

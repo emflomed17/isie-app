@@ -68,6 +68,10 @@ const MESSAGES = [
     content: "What is the most spoken language in the world?",
   },
   {
+    role: "assistant",
+    content: "Hello! How can I assist you today?",
+  },
+  {
     role: "user",
     content: "What is the most spoken language in the world?",
   },
@@ -80,18 +84,39 @@ const MESSAGES = [
     content: "What is the most spoken language in the world?",
   },
   {
+    role: "assistant",
+    content: "Hello! How can I assist you today?",
+  },
+  {
     role: "user",
     content: "What is the most spoken language in the world?",
   },
   {
     role: "assistant",
     content: "Hello! How can I assist you today?",
+  },
+  {
+    role: "user",
+    content: "What is the most spoken language in the world?",
+  },
+  {
+    role: "assistant",
+    content: "Hello! How can I assist you today?",
+  },
+  {
+    role: "user",
+    content: "What is the most spoken language in the world?",
+  },
+
+  {
+    role: "assistant",
+    content: "Hello! How can I assist you today? 978789789789879",
   },
 ];
 
 const MessageList = () => {
   return (
-    <div className="messages-container">
+    <>
       {MESSAGES.filter((item) => item.role !== "system").map((item) => (
         <div
           key={randomUUID()}
@@ -100,7 +125,8 @@ const MessageList = () => {
           <Message role={item.role} content={item.content} />
         </div>
       ))}
-    </div>
+      <div className="empty-space"></div>
+    </>
   );
 };
 

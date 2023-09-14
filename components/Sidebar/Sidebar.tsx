@@ -17,7 +17,7 @@ import QuestionList from "../QuestionList/QuestionList";
 
 const Sidebar = () => {
   return (
-    <Col md={2} className="sidebar bg-dark">
+    <Col sm={12} md={2} className="sidebar bg-dark">
       <Stack direction="horizontal" gap={2} className="p-2">
         <Button
           variant="outline-light"

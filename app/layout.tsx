@@ -39,15 +39,11 @@ const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
           <Container as="main" fluid>
             <Row>
               <Sidebar />
-              <Col className="main-container">
-                {/* {children} */}
-                {!isNewConversation && (
-                  <>
-                    <MessageList />
-                  </>
-                )}
-                <div className="bottom-container">
-                  {isNewConversation && <QuickQuestions />}
+              <Col sm={12} md className="main-container px-0">
+                <div className="messages-container">
+                  <MessageList />
+                </div>
+                <div className="user-input-container">
                   <UserInput />
                 </div>
               </Col>
