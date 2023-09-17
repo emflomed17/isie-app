@@ -1,4 +1,7 @@
-import React from "react";
+"use client";
+import React, { FormEventHandler, useRef, useState } from "react";
+import { useParams, useRouter } from "next/navigation";
+import { v4 as uuidv4 } from "uuid";
 import {
   Button,
   Container,
@@ -7,30 +10,93 @@ import {
   FormGroup,
   FormLabel,
   Row,
+  Spinner,
 } from "../../lib/react-bootstrap";
 import { BsSendFill } from "react-icons/bs";
+import { interactWithChat } from "@/api/request";
+import { useChatContext } from "@/app/ChatContext";
+import { ChatCompletion, ChatType } from "@/utils/types";
 
 const UserInput = () => {
+  const [inputValue, setInputValue] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { createChat, updateChat, chats, chat } = useChatContext();
+  const router = useRouter();
+  const params = useParams();
+
+  const isNewChat = !params.id;
+
+  const handleOnSubmit = async (event: any) => {
+    event.preventDefault();
+
+    if (!inputValue) return;
+
+    try {
+      setIsLoading(true);
+
+      const response = await interactWithChat({
+        message: inputValue,
+      });
+
+      if (isNewChat) {
+        const chatId = uuidv4();
+        createChat({ id: chatId, question: inputValue, response });
+        router.push(`/chat/${chatId}`);
+        return;
+      }
+
+      updateChat({
+        idToUpdate: params.id as string,
+        question: inputValue,
+        response: response,
+      });
+
+      setInputValue("");
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      handleOnSubmit(e);
+    }
+  };
+
+  const btnVariant = inputValue ? "secondary" : "outline-secondary";
+
   return (
-    <Form>
-      <FormGroup controlId="formBasicEmail">
-        <div className="input-group input-chat">
-          <FormControl
+    <Container className="bottom-container">
+      <Row>
+        <div className="input-group input-chat px-0">
+          <input
             type="text"
             placeholder="Send a message"
             className="form-input form-control"
             autoComplete="none"
+            onChange={(e) => setInputValue(e.target.value)}
+            value={inputValue}
+            onKeyDown={handleKeyDown}
           />
           <span className="input-group-text">
             <div className="d-flex justify-content-end">
-              <Button
-                className="submit-btn"
-                variant="outline-secondary"
-                size="lg"
-                type="submit"
-              >
-                <BsSendFill size="16px" />
-              </Button>
+              {isLoading ? (
+                <Spinner animation="grow" size="sm" className="me-2" />
+              ) : (
+                <Button
+                  className="submit-btn me-2"
+                  variant={btnVariant}
+                  size="lg"
+                  type="button"
+                  onClick={handleOnSubmit}
+                  disabled={isLoading}
+                >
+                  <BsSendFill size="16px" />
+                </Button>
+              )}
             </div>
           </span>
         </div>
@@ -38,8 +104,8 @@ const UserInput = () => {
           ChatGPT may produce inaccurate information about people, places, or
           facts. ChatGPT August 3 Version
         </p>
-      </FormGroup>
-    </Form>
+      </Row>
+    </Container>
   );
 };
 
