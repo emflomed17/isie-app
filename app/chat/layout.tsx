@@ -23,13 +23,12 @@ interface ChatLayoutProps {
 
 const ChatLayout: React.FC<ChatLayoutProps> = ({ children }) => {
   return (
-    <div>
-      <div>{children}</div>
-      {/* <div className="chat-user-input">
-        <QuickQuestions />
+    <>
+      <div className="messages-container">{children}</div>
+      <div className="user-input-container">
         <UserInput />
-      </div> */}
-    </div>
+      </div>
+    </>
   );
 };
 

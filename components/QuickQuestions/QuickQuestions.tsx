@@ -24,7 +24,7 @@ const Question = () => {
 
 const QuickQuestions = () => {
   return (
-    <Container>
+    <Container className="bottom-container">
       <Row>
         <Col md={6} className="pb-3">
           <div className="quick-question">

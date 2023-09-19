@@ -1,131 +1,56 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import Message from "../Message/Message";
-import { randomUUID } from "crypto";
+import { v4 as uuidv4 } from "uuid";
+import { MESSAGES } from "@/mock-data/data";
+import { LocalMessage } from "@/utils/types";
+import { useChatContext } from "@/app/ChatContext";
 
-const MESSAGES = [
-  {
-    role: "system",
-    content: "You are a helpful assistant.",
-  },
-  {
-    role: "user",
-    content: "Hello!",
-  },
-  {
-    role: "assistant",
-    content: "Hello! How can I assist you today?",
-  },
-  {
-    role: "user",
-    content: "What is the most spoken language in the world?",
-  },
-  {
-    role: "assistant",
-    content: "Hello! How can I assist you today?",
-  },
-  {
-    role: "user",
-    content: "What is the most spoken language in the world?",
-  },
-  {
-    role: "assistant",
-    content: "Hello! How can I assist you today?",
-  },
-  {
-    role: "user",
-    content: "What is the most spoken language in the world?",
-  },
-  {
-    role: "assistant",
-    content: "Hello! How can I assist you today?",
-  },
-  {
-    role: "user",
-    content: "What is the most spoken language in the world?",
-  },
-  {
-    role: "assistant",
-    content: "Hello! How can I assist you today?",
-  },
-  {
-    role: "user",
-    content: "What is the most spoken language in the world?",
-  },
-  {
-    role: "assistant",
-    content: "Hello! How can I assist you today?",
-  },
-  {
-    role: "user",
-    content: "What is the most spoken language in the world?",
-  },
-  {
-    role: "assistant",
-    content: "Hello! How can I assist you today?",
-  },
-  {
-    role: "user",
-    content: "What is the most spoken language in the world?",
-  },
-  {
-    role: "assistant",
-    content: "Hello! How can I assist you today?",
-  },
-  {
-    role: "user",
-    content: "What is the most spoken language in the world?",
-  },
-  {
-    role: "assistant",
-    content: "Hello! How can I assist you today?",
-  },
-  {
-    role: "user",
-    content: "What is the most spoken language in the world?",
-  },
-  {
-    role: "assistant",
-    content: "Hello! How can I assist you today?",
-  },
-  {
-    role: "user",
-    content: "What is the most spoken language in the world?",
-  },
-  {
-    role: "assistant",
-    content: "Hello! How can I assist you today?",
-  },
-  {
-    role: "user",
-    content: "What is the most spoken language in the world?",
-  },
-  {
-    role: "assistant",
-    content: "Hello! How can I assist you today?",
-  },
-  {
-    role: "user",
-    content: "What is the most spoken language in the world?",
-  },
+interface MessageListProps {
+  messages: LocalMessage[];
+  isValidChat: boolean;
+}
 
-  {
-    role: "assistant",
-    content: "Hello! How can I assist you today? 978789789789879",
-  },
-];
+const MessageList = ({ messages, isValidChat }: MessageListProps) => {
+  const { isLoading, currentQuestion } = useChatContext();
+  const router = useRouter();
+  const [isClient, setIsClient] = useState(false);
 
-const MessageList = () => {
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  // useEffect(() => {
+  //   !isValidChat && console.log("chat does not exist");
+  //   router.push("/");
+  // }, [isValidChat, router]);
+
   return (
     <>
-      {MESSAGES.filter((item) => item.role !== "system").map((item) => (
-        <div
-          key={randomUUID()}
-          className={item.role === "assistant" ? "ai-bg" : ""}
-        >
-          <Message role={item.role} content={item.content} />
+      {isClient ? (
+        <div>
+          {messages
+            .filter((item) => item.role !== "system")
+            .map((item) => (
+              <div
+                key={uuidv4()}
+                className={item.role === "assistant" ? "ai-bg" : ""}
+              >
+                <Message role={item.role} content={item.content} />
+              </div>
+            ))}
+          <div className="empty-space">
+            {currentQuestion ? (
+              <Message role="user" content={currentQuestion} />
+            ) : (
+              ""
+            )}
+          </div>
         </div>
-      ))}
-      <div className="empty-space"></div>
+      ) : (
+        <div></div>
+      )}
     </>
   );
 };

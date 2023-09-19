@@ -19,8 +19,17 @@ import { ChatCompletion, ChatType } from "@/utils/types";
 
 const UserInput = () => {
   const [inputValue, setInputValue] = useState<string>("");
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const { createChat, updateChat, chats, chat } = useChatContext();
+  // const [isLoading, setIsLoading] = useState<boolean>(false);
+  const {
+    createChat,
+    updateChat,
+    chats,
+    chat,
+    isLoading,
+    setIsLoading,
+    currentQuestion,
+    setCurrentQuestion,
+  } = useChatContext();
   const router = useRouter();
   const params = useParams();
 
@@ -31,8 +40,12 @@ const UserInput = () => {
 
     if (!inputValue) return;
 
+    setCurrentQuestion(inputValue);
+
     try {
       setIsLoading(true);
+
+      setInputValue("");
 
       const response = await interactWithChat({
         message: inputValue,
@@ -41,7 +54,9 @@ const UserInput = () => {
       if (isNewChat) {
         const chatId = uuidv4();
         createChat({ id: chatId, question: inputValue, response });
+        setCurrentQuestion("");
         router.push(`/chat/${chatId}`);
+        router.prefetch(`/chat/${chatId}`);
         return;
       }
 
@@ -51,7 +66,7 @@ const UserInput = () => {
         response: response,
       });
 
-      setInputValue("");
+      setCurrentQuestion("");
     } catch (error) {
       console.error(error);
     } finally {
@@ -80,6 +95,7 @@ const UserInput = () => {
             onChange={(e) => setInputValue(e.target.value)}
             value={inputValue}
             onKeyDown={handleKeyDown}
+            disabled={isLoading}
           />
           <span className="input-group-text">
             <div className="d-flex justify-content-end">

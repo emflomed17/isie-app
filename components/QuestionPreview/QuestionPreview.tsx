@@ -1,17 +1,23 @@
 import React from "react";
+import Link from "next/link";
+import { useParams, useRouter } from "next/navigation";
 import { BsChatLeft } from "react-icons/bs";
 
 interface QuestionPreviewProps {
   id: string;
   title: string;
-  isActive: boolean;
 }
 
-const QuestionPreview = ({ id, title, isActive }: QuestionPreviewProps) => {
+const QuestionPreview = ({ id, title }: QuestionPreviewProps) => {
+  const params = useParams();
+
   return (
-    <div className="question-overview">
+    <Link
+      href={`/chat/${id}`}
+      className={`question-overview ${params.id === id && "question-active"}`}
+    >
       <BsChatLeft /> &nbsp;&nbsp;{title}
-    </div>
+    </Link>
   );
 };
 

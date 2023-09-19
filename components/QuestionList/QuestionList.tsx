@@ -1,16 +1,21 @@
 import React from "react";
 import { Nav } from "../../lib/react-bootstrap";
 import QuestionPreview from "../QuestionPreview/QuestionPreview";
+import { useChatContext } from "@/app/ChatContext";
 
 const QuestionList = () => {
+  const { chats } = useChatContext();
   return (
     <Nav className="questions-container flex-column d-none d-md-flex mt-2">
       <p className="sub-item">Last Questions</p>
-      <QuestionPreview id="1" title="First Question" isActive />
-      <QuestionPreview id="1" title="First Question" isActive />
-      {/* 
-      <Nav.Link href="#">Link 2</Nav.Link>
-      <Nav.Link href="#">Link 3</Nav.Link> */}
+
+      {chats &&
+        chats.map((item) => {
+          const titleOverview = item.title.slice(0, 30);
+          return (
+            <QuestionPreview key={item.id} id={item.id} title={titleOverview} />
+          );
+        })}
     </Nav>
   );
 };

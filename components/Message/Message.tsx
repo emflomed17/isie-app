@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { Col, Container, Image, Row } from "../../lib/react-bootstrap";
 
@@ -6,23 +7,34 @@ interface MessageProps {
   role: string;
 }
 
+const ImageConfigByRole: Record<string, Record<string, string>> = {
+  user: {
+    path: "/user.png",
+    height: "40",
+    width: "40",
+  },
+  assistant: {
+    path: "/iwatan.png",
+    height: "60",
+    width: "40",
+  },
+};
+
 const Message = ({ content, role }: MessageProps) => {
   return (
     <Container fluid className="chat-message-container">
-      <Row>
+      <Row className="align-items-center">
         <Col xs={2} sm={1}>
-          <Image src="https://placehold.co/40" alt="user-image" rounded />
+          <Image
+            src={ImageConfigByRole[role].path}
+            alt="user-image"
+            rounded
+            height={ImageConfigByRole[role].height}
+            width={ImageConfigByRole[role].width}
+          />
         </Col>
         <Col xs={10} sm={11}>
-          <p className="chat-text">
-            {content}
-            {/* Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam,
-            temporibus voluptate magni dolore cupiditate, adipisci inventore
-            tempora ut quos iste at aliquam culpa, sit quam reprehenderit alias
-            eos ipsa similique cumque sunt? Sint natus corporis aliquam a dolore
-            sed rerum repudiandae reprehenderit nam. Explicabo voluptatum
-            excepturi laborum possimus nihil accusamus. */}
-          </p>
+          <p className="chat-text">{content}</p>
         </Col>
       </Row>
     </Container>

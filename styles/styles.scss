@@ -19,6 +19,7 @@ body {
   margin: 0;
   padding: 0;
   overflow: hidden;
+  background-color: rgb(52, 53, 65);
 }
 
 .main-container {
@@ -36,12 +37,18 @@ body {
 .user-input-container {
   position: fixed;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   background-color: transparent;
-  height: 105px;
+  // height: 105px;
   bottom: 0;
   left: 260px;
   right: 0px;
+  padding: 0 10%;
+}
+
+.bottom-container {
+  max-width: 800px;
 }
 
 .sidebar {
@@ -70,9 +77,14 @@ body {
   color: white;
   cursor: pointer;
   font-size: 0.875rem;
+  text-decoration: none;
 }
 
 .question-overview:hover {
+  @extend %custom-hover-styles;
+}
+
+.question-overview.question-active {
   @extend %custom-hover-styles;
 }
 
@@ -81,6 +93,11 @@ body {
   color: rgba(255, 255, 255, 0.501);
   margin-top: 8px;
   padding: 0px 16px;
+}
+
+.quick-questions-container {
+  display: flex;
+  justify-content: center;
 }
 
 .quick-question {
@@ -113,6 +130,13 @@ body {
   box-shadow: none;
   caret-color: white;
   color: white;
+}
+
+.form-input:disabled {
+  background-color: rgba(64, 65, 79, 1);
+  color: rgba(255, 255, 255, 0.501);
+  border: none;
+  cursor: not-allowed;
 }
 
 .form-input::placeholder {
@@ -160,6 +184,7 @@ body {
   color: rgba(255, 255, 255, 1);
   text-align: justify;
   padding-left: 8px;
+  white-space: pre-line;
 }
 
 .copyright-text {
@@ -170,7 +195,7 @@ body {
 }
 
 .empty-space {
-  height: 80px;
+  height: 150px;
 }
 
 @media (max-width: 767px) {
@@ -196,12 +221,11 @@ body {
 //   }
 // }
 
-// /* Apply styles for width less than or equal to 600px */
-// @media (max-width: 767px) {
-//   .messages-container {
-//     height: 770px;
-//   }
-// }
+@media (max-width: 767px) {
+  .user-input-container {
+    padding: 0;
+  }
+}
 
 // /* Apply styles for width between 601px and 1024px */
 // @media (min-width: 767px) and (max-width: 1024px) {

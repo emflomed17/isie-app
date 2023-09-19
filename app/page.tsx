@@ -1,9 +1,17 @@
 import React from "react";
 
-import { Col } from "../lib/react-bootstrap";
+import QuickQuestions from "@/components/QuickQuestions/QuickQuestions";
+import UserInput from "@/components/UserInput/UserInput";
 
 const Home = () => {
-  return <div>Home</div>;
+  return (
+    <>
+      <div className="user-input-container">
+        <QuickQuestions />
+        <UserInput />
+      </div>
+    </>
+  );
 };
 
 export default Home;

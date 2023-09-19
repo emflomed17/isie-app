@@ -9,39 +9,24 @@ import React, {
   useCallback,
   useEffect,
 } from "react";
-import { ChatCompletion } from "@/utils/types";
+import {
+  Chat,
+  ChatCompletion,
+  CreateChatParams,
+  LocalMessage,
+  UpdateChatParams,
+} from "@/utils/types";
 import useLocalStorage from "@/hooks/localStorage";
-
-interface LocalMessage {
-  role: string;
-  content: string;
-}
-
-// Define the chat type
-interface Chat {
-  id: string;
-  title: string;
-  createdAt: number;
-  messages: LocalMessage[];
-}
-
-interface CreateChatParams {
-  id: string;
-  question: string;
-  response: ChatCompletion;
-}
-
-interface UpdateChatParams {
-  idToUpdate: string;
-  question: string;
-  response: ChatCompletion;
-}
 
 const initialState: Chat[] = [];
 
 interface ChatContextType {
   chat: Chat | {};
   chats: Chat[];
+  isLoading: boolean;
+  currentQuestion: string;
+  setCurrentQuestion: (value: string) => void;
+  setIsLoading: (value: boolean) => void;
   createChat: ({ id, question, response }: CreateChatParams) => void;
   updateChat: ({ idToUpdate, question, response }: UpdateChatParams) => void;
   deleteChat: (chatId: number) => void;
@@ -56,6 +41,8 @@ interface ChatProviderProps {
 export const ChatProvider: React.FC<ChatProviderProps> = ({ children }) => {
   const [chat, setChat] = useState<Chat | {}>({});
   const [chats, setChats] = useLocalStorage("chats", initialState);
+  const [isLoading, setIsLoading] = useState(false);
+  const [currentQuestion, setCurrentQuestion] = useState("");
 
   const createChat = ({ id, question, response }: CreateChatParams) => {
     const unixDate = Date.now() / 1000;
@@ -64,6 +51,10 @@ export const ChatProvider: React.FC<ChatProviderProps> = ({ children }) => {
       content: question,
     };
     const assistantMessage: LocalMessage = response.choices[0].message;
+    // const assistantMessage = {
+    //   role: "user",
+    //   content: "",
+    // };
 
     const newChat: Chat = {
       id,
@@ -73,7 +64,6 @@ export const ChatProvider: React.FC<ChatProviderProps> = ({ children }) => {
     };
     const newChats = [newChat, ...chats];
     setChats(newChats);
-    setChat(newChat);
   };
 
   function updateChat({ idToUpdate, question, response }: UpdateChatParams) {
@@ -101,7 +91,17 @@ export const ChatProvider: React.FC<ChatProviderProps> = ({ children }) => {
 
   return (
     <ChatContext.Provider
-      value={{ chat, chats, createChat, updateChat, deleteChat }}
+      value={{
+        chat,
+        chats,
+        isLoading,
+        currentQuestion,
+        setCurrentQuestion,
+        setIsLoading,
+        createChat,
+        updateChat,
+        deleteChat,
+      }}
     >
       {children}
     </ChatContext.Provider>
