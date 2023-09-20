@@ -1,14 +1,23 @@
 "use client";
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
-import { BsList } from "react-icons/bs";
+import { BsList, BsPlus } from "react-icons/bs";
 import Offcanvas from "react-bootstrap/Offcanvas";
+import QuestionList from "../QuestionList/QuestionList";
+import { Stack } from "react-bootstrap";
+import { useRouter } from "next/navigation";
 
 const SidebarMobile: React.FC = () => {
   const [show, setShow] = useState(false);
+  const router = useRouter();
 
   const handleClose = () => setShow(false);
   const toggleShow = () => setShow((s) => !s);
+
+  const handleOnNewChatClick = () => {
+    handleClose();
+    router.push("/");
+  };
 
   return (
     <>
@@ -21,11 +30,18 @@ const SidebarMobile: React.FC = () => {
       </Button>
       <Offcanvas show={show} onHide={handleClose}>
         <Offcanvas.Header closeButton className="bg-dark">
-          <Offcanvas.Title>Offcanvas</Offcanvas.Title>
+          <Offcanvas.Title className="text-white">Offcanvas</Offcanvas.Title>
         </Offcanvas.Header>
-        <Offcanvas.Body className="bg-dark">
-          Some text as a placeholder. In real life, you can have the elements
-          you have chosen, like text, images, lists, etc.
+        <Offcanvas.Body className="bg-dark text-white">
+          <Button
+            variant="outline-light"
+            className="custom-button new-chat-btn d-md-flex mt-3"
+            onClick={handleOnNewChatClick}
+          >
+            <BsPlus size="20px" /> &nbsp; New Chat
+          </Button>
+
+          <QuestionList onItemClick={handleClose} />
         </Offcanvas.Body>
       </Offcanvas>
     </>

@@ -1,9 +1,8 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Message from "../Message/Message";
 import { v4 as uuidv4 } from "uuid";
-import { MESSAGES } from "@/mock-data/data";
 import { LocalMessage } from "@/utils/types";
 import { useChatContext } from "@/app/ChatContext";
 
@@ -13,7 +12,8 @@ interface MessageListProps {
 }
 
 const MessageList = ({ messages, isValidChat }: MessageListProps) => {
-  const { isLoading, currentQuestion } = useChatContext();
+  const { isLoading, currentQuestion, errorMessage, setErrorMessage } =
+    useChatContext();
   const router = useRouter();
   const [isClient, setIsClient] = useState(false);
 
@@ -21,10 +21,18 @@ const MessageList = ({ messages, isValidChat }: MessageListProps) => {
     setIsClient(true);
   }, []);
 
-  // useEffect(() => {
-  //   !isValidChat && console.log("chat does not exist");
-  //   router.push("/");
-  // }, [isValidChat, router]);
+  useEffect(() => {
+    if (!isValidChat) {
+      setErrorMessage("This chat could not be found");
+
+      setTimeout(() => {
+        router.push("/");
+        setErrorMessage("");
+      }, 2000);
+    }
+  }, [isValidChat, router, setErrorMessage]);
+
+  console.log(process.env.OPEN_AI_API_KEY);
 
   return (
     <>

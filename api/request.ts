@@ -1,5 +1,3 @@
-// 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
-
 import { ChatCompletion } from "@/utils/types";
 
 interface ChatInteraction {
@@ -7,16 +5,16 @@ interface ChatInteraction {
   isNewInteraction?: boolean;
 }
 
+const API_KEY = "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";
+
 export const interactWithChat = async ({
   message,
   isNewInteraction = true,
 }: ChatInteraction): Promise<ChatCompletion> => {
-  // const shouldFail = message.includes("error");
-  // const response = await fakeOpenaiApiResponse(message, shouldFail);
   const response = await openAiApi(message);
 
   if (!response.ok) {
-    throw new Error("Network response was not ok");
+    throw new Error("Something went wrong. Please try again.");
   }
 
   const responseData = await response.json();
@@ -38,7 +36,7 @@ const openAiApi = async (userInput: string): Promise<Response> => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer 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`,
+      Authorization: `Bearer ${API_KEY}`,
       // Add any other headers as needed
     },
     body: JSON.stringify(data),
@@ -54,41 +52,4 @@ const openAiApi = async (userInput: string): Promise<Response> => {
     console.error("There was a problem with the fetch operation:", error);
     throw error;
   }
-};
-
-const fakeOpenaiApiResponse = async (
-  userInput: string,
-  shouldFail = false
-): Promise<ChatCompletion | string> => {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      const id = "chatcmpl-7wYkG1GEjSjsRUP1b4uxE6Qm6vpcD";
-      const unixDate = Date.now() / 1000;
-      const responseObject = {
-        id,
-        object: "chat.completion",
-        created: unixDate,
-        model: "gpt-3.5-turbo-0613",
-        choices: [
-          {
-            index: 0,
-            message: {
-              role: "assistant",
-              content: `Hello! This is the answer for the question: ${userInput}`,
-            },
-            finish_reason: "stop",
-          },
-        ],
-        usage: {
-          prompt_tokens: 19,
-          completion_tokens: 9,
-          total_tokens: 28,
-        },
-      };
-
-      shouldFail
-        ? reject("There was an error. Please try again")
-        : resolve(responseObject);
-    }, 1500); // Simulate an asynchronous delay
-  });
 };

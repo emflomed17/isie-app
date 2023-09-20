@@ -6,15 +6,21 @@ import { BsChatLeft } from "react-icons/bs";
 interface QuestionPreviewProps {
   id: string;
   title: string;
+  onClick?: () => void;
 }
 
-const QuestionPreview = ({ id, title }: QuestionPreviewProps) => {
+const QuestionPreview = ({
+  id,
+  title,
+  onClick = () => null,
+}: QuestionPreviewProps) => {
   const params = useParams();
 
   return (
     <Link
       href={`/chat/${id}`}
       className={`question-overview ${params.id === id && "question-active"}`}
+      onClick={onClick}
     >
       <BsChatLeft /> &nbsp;&nbsp;{title}
     </Link>

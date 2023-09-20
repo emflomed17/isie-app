@@ -2,33 +2,20 @@
 import React, { FormEventHandler, useRef, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { v4 as uuidv4 } from "uuid";
-import {
-  Button,
-  Container,
-  Form,
-  FormControl,
-  FormGroup,
-  FormLabel,
-  Row,
-  Spinner,
-} from "../../lib/react-bootstrap";
+import { Button, Container, Row, Spinner } from "../../lib/react-bootstrap";
 import { BsSendFill } from "react-icons/bs";
 import { interactWithChat } from "@/api/request";
 import { useChatContext } from "@/app/ChatContext";
-import { ChatCompletion, ChatType } from "@/utils/types";
 
 const UserInput = () => {
   const [inputValue, setInputValue] = useState<string>("");
-  // const [isLoading, setIsLoading] = useState<boolean>(false);
   const {
     createChat,
     updateChat,
-    chats,
-    chat,
     isLoading,
     setIsLoading,
-    currentQuestion,
     setCurrentQuestion,
+    setErrorMessage,
   } = useChatContext();
   const router = useRouter();
   const params = useParams();
@@ -67,7 +54,8 @@ const UserInput = () => {
       });
 
       setCurrentQuestion("");
-    } catch (error) {
+    } catch (error: any) {
+      setErrorMessage(error.message);
       console.error(error);
     } finally {
       setIsLoading(false);

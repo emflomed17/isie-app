@@ -25,11 +25,13 @@ interface ChatContextType {
   chats: Chat[];
   isLoading: boolean;
   currentQuestion: string;
+  errorMessage: string;
   setCurrentQuestion: (value: string) => void;
   setIsLoading: (value: boolean) => void;
   createChat: ({ id, question, response }: CreateChatParams) => void;
   updateChat: ({ idToUpdate, question, response }: UpdateChatParams) => void;
   deleteChat: (chatId: number) => void;
+  setErrorMessage: (value: string) => void;
 }
 
 const ChatContext = createContext<ChatContextType | undefined>(undefined);
@@ -43,6 +45,7 @@ export const ChatProvider: React.FC<ChatProviderProps> = ({ children }) => {
   const [chats, setChats] = useLocalStorage("chats", initialState);
   const [isLoading, setIsLoading] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const createChat = ({ id, question, response }: CreateChatParams) => {
     const unixDate = Date.now() / 1000;
@@ -51,10 +54,6 @@ export const ChatProvider: React.FC<ChatProviderProps> = ({ children }) => {
       content: question,
     };
     const assistantMessage: LocalMessage = response.choices[0].message;
-    // const assistantMessage = {
-    //   role: "user",
-    //   content: "",
-    // };
 
     const newChat: Chat = {
       id,
@@ -75,7 +74,6 @@ export const ChatProvider: React.FC<ChatProviderProps> = ({ children }) => {
 
     const updatedChats = chats.map((item: Chat) => {
       if (item.id === idToUpdate) {
-        // Create a new item with updated messages array
         const updatedItem: Chat = {
           ...item,
           messages: [...item.messages, userMessage, assistantMessage],
@@ -96,11 +94,13 @@ export const ChatProvider: React.FC<ChatProviderProps> = ({ children }) => {
         chats,
         isLoading,
         currentQuestion,
+        errorMessage,
         setCurrentQuestion,
         setIsLoading,
         createChat,
         updateChat,
         deleteChat,
+        setErrorMessage,
       }}
     >
       {children}

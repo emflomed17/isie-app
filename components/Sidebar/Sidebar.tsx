@@ -43,15 +43,11 @@ const Sidebar = () => {
             >
               <BsPlus size="20px" /> &nbsp; New Chat
             </Button>
-            {/* <Button
-          variant="outline-light"
-          className="custom-button d-none d-md-flex mt-3"
-        >
-          <BsLayoutSidebar size="20px" />
-        </Button> */}
           </Stack>
 
-          <QuestionList />
+          <div className=" d-none d-md-flex">
+            <QuestionList />
+          </div>
 
           <SidebarMobile />
         </Col>

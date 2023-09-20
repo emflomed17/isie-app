@@ -6,7 +6,7 @@ import React from "react";
 const page = () => {
   return (
     <>
-      <h1>this is the /chat</h1>
+      <div></div>
     </>
   );
 };

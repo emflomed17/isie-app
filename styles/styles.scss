@@ -108,6 +108,7 @@ body {
   border: 1px solid;
   border-color: hsla(0, 0%, 100%, 0.2);
   border-radius: 8px;
+  text-decoration: none;
 }
 
 .quick-question:hover {
@@ -196,6 +197,11 @@ body {
 
 .empty-space {
   height: 150px;
+}
+
+.toast-custom-header {
+  background-color: #dc3545;
+  color: #fff;
 }
 
 @media (max-width: 767px) {
