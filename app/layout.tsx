@@ -6,6 +6,7 @@ import { Roboto } from "next/font/google";
 import { Metadata } from "next";
 
 import { ChatProvider } from "./ChatContext";
+import ErrorToast from "@/components/ErrorToast/ErrorToast";
 
 export const metadata: Metadata = {
   title: "Chat App",
@@ -28,6 +29,7 @@ const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
       <body className={roboto.className}>
         <>
           <ChatProvider>
+            <ErrorToast />
             <Container as="main" fluid>
               <Row>
                 <Sidebar />

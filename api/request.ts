@@ -41,6 +41,7 @@ const openAiApi = async (userInput: string): Promise<Response> => {
     },
     body: JSON.stringify(data),
   };
+
   try {
     const response: Response = await fetch(
       "https://api.openai.com/v1/chat/completions",
