@@ -5,7 +5,7 @@ interface ChatInteraction {
   isNewInteraction?: boolean;
 }
 
-const API_KEY = "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";
+const API_KEY = "API_KEY_HERE";
 
 export const interactWithChat = async ({
   message,
