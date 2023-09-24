@@ -30,7 +30,7 @@ interface ChatContextType {
   setIsLoading: (value: boolean) => void;
   createChat: ({ id, question, response }: CreateChatParams) => void;
   updateChat: ({ idToUpdate, question, response }: UpdateChatParams) => void;
-  deleteChat: (chatId: number) => void;
+  deleteChat: (chatId: string) => void;
   setErrorMessage: (value: string) => void;
 }
 
@@ -85,7 +85,10 @@ export const ChatProvider: React.FC<ChatProviderProps> = ({ children }) => {
     setChats(updatedChats);
   }
 
-  const deleteChat = (chatId: number) => {};
+  const deleteChat = (chatId: string) => {
+    const newChats = chats.filter((item) => item.id !== chatId);
+    setChats(newChats);
+  };
 
   return (
     <ChatContext.Provider
