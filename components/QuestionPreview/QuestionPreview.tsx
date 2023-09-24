@@ -16,7 +16,7 @@ const QuestionPreview = ({
   title,
   onClick = () => null,
 }: QuestionPreviewProps) => {
-  const { deleteChat } = useChatContext();
+  const { deleteChat, setErrorMessage } = useChatContext();
   const params = useParams();
   const router = useRouter();
   const isActive = params.id === id;
@@ -26,7 +26,11 @@ const QuestionPreview = ({
   const handleOpenModal = () => setIsModalOpen(true);
 
   const handleOnDelete = () => {
-    deleteChat(id);
+    router.push("/");
+    setIsModalOpen(false);
+    setTimeout(() => {
+      deleteChat(id);
+    }, 1000);
   };
 
   return (

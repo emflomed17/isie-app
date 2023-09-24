@@ -25,16 +25,16 @@ const SidebarMobile: React.FC = () => {
         <Button
           variant="outline-light"
           onClick={toggleShow}
-          className="custom-button me-2 d-md-none mb-2"
+          className="custom-button ms-2 me-2 d-md-none mb-2"
         >
-          <BsList size="20px" />
+          <BsList size="24px" />
         </Button>
         <Button
           variant="outline-light"
           onClick={handleOnNewChatClick}
           className="custom-button me-2 d-md-none mb-2"
         >
-          <BsPlus size="20px" />
+          <BsPlus size="24px" />
         </Button>
       </div>
       <Offcanvas show={show} onHide={handleClose}>
