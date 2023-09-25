@@ -30,6 +30,7 @@ const QuestionPreview = ({
     setIsModalOpen(false);
     setTimeout(() => {
       deleteChat(id);
+      onClick && onClick();
     }, 1000);
   };
 
