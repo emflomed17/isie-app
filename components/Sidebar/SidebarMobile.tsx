@@ -4,7 +4,6 @@ import Button from "react-bootstrap/Button";
 import { BsList, BsPlus } from "react-icons/bs";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import QuestionList from "../QuestionList/QuestionList";
-import { Stack } from "react-bootstrap";
 import { useRouter } from "next/navigation";
 
 const SidebarMobile: React.FC = () => {
@@ -21,13 +20,22 @@ const SidebarMobile: React.FC = () => {
 
   return (
     <>
-      <Button
-        variant="outline-light"
-        onClick={toggleShow}
-        className="custom-button me-2 d-md-none mb-2"
-      >
-        <BsList size="20px" />
-      </Button>
+      <div className="mobile-bar">
+        <Button
+          variant="outline-light"
+          onClick={toggleShow}
+          className="custom-button ms-2 me-2 d-md-none mb-2"
+        >
+          <BsList size="24px" />
+        </Button>
+        <Button
+          variant="outline-light"
+          onClick={handleOnNewChatClick}
+          className="custom-button me-2 d-md-none mb-2"
+        >
+          <BsPlus size="24px" />
+        </Button>
+      </div>
       <Offcanvas show={show} onHide={handleClose}>
         <Offcanvas.Header closeButton className="bg-dark">
           <Offcanvas.Title className="text-white">Offcanvas</Offcanvas.Title>

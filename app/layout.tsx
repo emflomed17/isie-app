@@ -1,7 +1,7 @@
 import "@/styles/styles.scss";
 import Sidebar from "@/components/Sidebar/Sidebar";
 import { ReactNode } from "react";
-import { Col, Container, Row, SSRProvider } from "../lib/react-bootstrap";
+import { Col, Container, Row } from "../lib/react-bootstrap";
 import { Roboto } from "next/font/google";
 import { Metadata } from "next";
 
