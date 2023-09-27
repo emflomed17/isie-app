@@ -1,17 +1,7 @@
 "use client";
-import { v4 as uuidv4 } from "uuid";
-import React, {
-  createContext,
-  useReducer,
-  useContext,
-  ReactNode,
-  useState,
-  useCallback,
-  useEffect,
-} from "react";
+import React, { createContext, useContext, ReactNode, useState } from "react";
 import {
   Chat,
-  ChatCompletion,
   CreateChatParams,
   LocalMessage,
   UpdateChatParams,

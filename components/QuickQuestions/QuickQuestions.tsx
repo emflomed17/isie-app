@@ -1,18 +1,7 @@
 "use client";
 import React from "react";
-import {
-  Button,
-  Col,
-  Container,
-  Form,
-  Nav,
-  Navbar,
-  Row,
-  Stack,
-} from "../../lib/react-bootstrap";
-import { BsPlus } from "react-icons/bs";
+import { Col, Container, Row } from "../../lib/react-bootstrap";
 import { v4 as uuidv4 } from "uuid";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useChatContext } from "@/app/ChatContext";
 import { interactWithChat } from "@/api/request";
@@ -47,16 +36,7 @@ interface QuestionProps {
 
 const Question = ({ title, subtitle }: QuestionProps) => {
   const router = useRouter();
-  const {
-    createChat,
-    updateChat,
-    chats,
-    chat,
-    isLoading,
-    setIsLoading,
-    currentQuestion,
-    setCurrentQuestion,
-  } = useChatContext();
+  const { createChat, setIsLoading, setCurrentQuestion } = useChatContext();
 
   const questionText = `${title} ${subtitle}`;
 

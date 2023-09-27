@@ -16,7 +16,7 @@ const QuestionPreview = ({
   title,
   onClick = () => null,
 }: QuestionPreviewProps) => {
-  const { deleteChat, setErrorMessage } = useChatContext();
+  const { deleteChat } = useChatContext();
   const params = useParams();
   const router = useRouter();
   const isActive = params.id === id;
