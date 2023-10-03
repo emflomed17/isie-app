@@ -2,14 +2,15 @@ import React from "react";
 
 import QuickQuestions from "@/components/QuickQuestions/QuickQuestions";
 import UserInput from "@/components/UserInput/UserInput";
+import UserInputWrapper from "@/components/UserInput/UserInputWrapper";
 
 const Home = () => {
   return (
     <>
-      <div className="user-input-container">
+      <UserInputWrapper>
         <QuickQuestions />
         <UserInput />
-      </div>
+      </UserInputWrapper>
     </>
   );
 };

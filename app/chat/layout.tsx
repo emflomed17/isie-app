@@ -4,6 +4,7 @@ import { Metadata } from "next";
 import QuickQuestions from "@/components/QuickQuestions/QuickQuestions";
 import UserInput from "@/components/UserInput/UserInput";
 import ChatHeader from "@/components/ChatHeader/ChatHeader";
+import UserInputWrapper from "@/components/UserInput/UserInputWrapper";
 
 export const metadata: Metadata = {
   title: "Chat App",
@@ -19,9 +20,9 @@ const ChatLayout: React.FC<ChatLayoutProps> = ({ children }) => {
     <>
       <ChatHeader />
       <div className="messages-container">{children}</div>
-      <div className="user-input-container">
+      <UserInputWrapper>
         <UserInput />
-      </div>
+      </UserInputWrapper>
     </>
   );
 };
