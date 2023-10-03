@@ -31,7 +31,7 @@ body {
 
 .messages-container {
   overflow: auto;
-  height: calc(100vh - 55px);
+  height: calc(100vh - 110px);
 }
 
 .user-input-container {
@@ -236,20 +236,27 @@ body {
   color: #fff;
 }
 
-@media (max-width: 767px) {
-  .sidebar {
-    width: 100%;
-  }
-  .user-input-container {
-    left: 0px;
-  }
-  .messages-container {
-    height: calc(100vh - 120px);
-  }
-  .input-chat {
-    // box-shadow: none;
-    background-color: rgba(52, 53, 65, 1);
-  }
+.header-chat {
+  display: flex;
+  height: 60px;
+  border: 1px solid;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  background-color: rgb(68, 70, 84);
+}
+
+// .header-chat.visible {
+//   // transform: translateY(0%);
+// }
+
+// .header-chat.hidden {
+//   transform: translateY(-100%);
+// }
+
+.header-p {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: small;
 }
 
 // @media (min-width: 765px) and (max-width: 1024px) {
@@ -260,8 +267,23 @@ body {
 // }
 
 @media (max-width: 767px) {
+  .sidebar {
+    width: 100%;
+  }
+  .header-chat {
+    top: 60px;
+    left: 0;
+  }
   .user-input-container {
+    left: 0px;
     padding: 0;
+  }
+  .messages-container {
+    height: calc(100vh - 185px);
+  }
+  .input-chat {
+    // box-shadow: none;
+    background-color: rgba(52, 53, 65, 1);
   }
 }
 
