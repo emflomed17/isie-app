@@ -54,6 +54,11 @@ body {
 .sidebar {
   width: 260px;
   padding: 0%;
+  z-index: 2;
+}
+
+.sidebar-toggle-container {
+  position: absolute;
 }
 
 .mobile-bar {
@@ -83,12 +88,15 @@ body {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 16px 8px;
+  padding: 14px 8px;
   cursor: pointer;
+  border-radius: 8px;
+  margin-right: 1rem;
+  margin-left: 0.5rem;
 }
 
 .question-overview:hover {
-  @extend %custom-hover-styles;
+  background-color: hsl(240deg 9% 59% / 11%);
 }
 
 .question-link {
@@ -201,12 +209,28 @@ body {
 
 .submit-btn {
   border: none;
+  padding: 4px 12px;
+  background-color: transparent;
+}
+
+.submit-btn:hover {
+  background-color: transparent;
+}
+
+.submit-btn.active {
+  background-color: #19c37d;
 }
 
 .chat-message-container {
   padding-bottom: 24px;
   padding-top: 20px;
-  max-width: 500px;
+  // max-width: 48rem;
+}
+
+.chat-icon-column {
+  display: flex;
+  justify-content: center;
+  align-self: flex-start;
 }
 
 .ai-bg {
@@ -214,10 +238,18 @@ body {
 }
 
 .chat-text {
-  color: rgba(255, 255, 255, 1);
-  text-align: justify;
+  text-align: left;
   padding-left: 8px;
   white-space: pre-line;
+  font-size: 1rem;
+}
+
+.chat-text.assistant {
+  color: #d1d5db;
+}
+
+.chat-text.user {
+  color: #ececf1;
 }
 
 .copyright-text {
@@ -287,17 +319,21 @@ body {
   }
 }
 
-// /* Apply styles for width between 601px and 1024px */
-// @media (min-width: 767px) and (max-width: 1024px) {
-//   .messages-container {
-//     height: 890px;
-//     padding-bottom: 80px;
-//   }
-// }
+/* Apply styles for width greater than or equal to 1025px */
+@media (min-width: 1280px) {
+  .chat-message-container {
+    max-width: 48rem;
+  }
+}
 
-// /* Apply styles for width greater than or equal to 1025px */
-// @media (min-width: 1025px) {
-//   .messages-container {
-//     height: 900px;
-//   }
-// }
+@media (min-width: 1024px) {
+  .chat-message-container {
+    max-width: 38rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .chat-message-container {
+    max-width: 34rem;
+  }
+}

@@ -7,6 +7,7 @@ import { Metadata } from "next";
 
 import { ChatProvider } from "./ChatContext";
 import ErrorToast from "@/components/ErrorToast/ErrorToast";
+import SidebarToggle from "@/components/Sidebar/SidebarToggle";
 
 export const metadata: Metadata = {
   title: "Chat App",
@@ -32,6 +33,9 @@ const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
             <ErrorToast />
             <Container as="main" fluid>
               <Row>
+                <div className="sidebar-toggle-container">
+                  <SidebarToggle />
+                </div>
                 <Sidebar />
                 <Col sm={12} md className="main-container px-0">
                   {children}
