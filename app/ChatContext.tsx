@@ -24,6 +24,7 @@ interface ChatContextType {
   deleteChat: (chatId: string) => void;
   setErrorMessage: (value: string) => void;
   setIsSidebarOpen: (value: boolean) => void;
+  getChatById: (id: string) => Chat | null;
 }
 
 const ChatContext = createContext<ChatContextType | undefined>(undefined);
@@ -83,6 +84,11 @@ export const ChatProvider: React.FC<ChatProviderProps> = ({ children }) => {
     setChats(newChats);
   };
 
+  const getChatById = (chatId: string): Chat | null => {
+    const filteredChats = chats.filter((item) => item.id === chatId);
+    return filteredChats.length > 0 ? filteredChats[0] : null;
+  };
+
   return (
     <ChatContext.Provider
       value={{
@@ -99,6 +105,7 @@ export const ChatProvider: React.FC<ChatProviderProps> = ({ children }) => {
         deleteChat,
         setErrorMessage,
         setIsSidebarOpen,
+        getChatById,
       }}
     >
       {children}

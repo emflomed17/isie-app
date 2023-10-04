@@ -4,11 +4,14 @@ import Button from "react-bootstrap/Button";
 import { BsList, BsPlus } from "react-icons/bs";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import QuestionList from "../QuestionList/QuestionList";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
+import { useChatContext } from "@/app/ChatContext";
 
-const SidebarMobile: React.FC = () => {
+const SidebarMobile = () => {
+  const { getChatById } = useChatContext();
   const [show, setShow] = useState(false);
   const router = useRouter();
+  const params = useParams();
 
   const handleClose = () => setShow(false);
   const toggleShow = () => setShow((s) => !s);
@@ -17,6 +20,12 @@ const SidebarMobile: React.FC = () => {
     handleClose();
     router.push("/");
   };
+
+  const currentChatId = params?.id as string;
+
+  const chatTitle = getChatById(currentChatId)?.title;
+
+  const titleOverview = chatTitle?.slice(0, 70);
 
   return (
     <>
@@ -28,6 +37,9 @@ const SidebarMobile: React.FC = () => {
         >
           <BsList size="24px" />
         </Button>
+        {chatTitle && (
+          <p className="mobile-chat-title d-md-none">{titleOverview}</p>
+        )}
         <Button
           variant="outline-light"
           onClick={handleOnNewChatClick}
@@ -37,8 +49,13 @@ const SidebarMobile: React.FC = () => {
         </Button>
       </div>
       <Offcanvas show={show} onHide={handleClose}>
-        <Offcanvas.Header closeButton className="bg-dark">
-          <Offcanvas.Title className="text-white">Offcanvas</Offcanvas.Title>
+        <Offcanvas.Header
+          closeButton
+          closeLabel="Close"
+          closeVariant="white"
+          className="bg-dark close-offset-btn"
+        >
+          {/* <Offcanvas.Title className="text-white">Anest Iwata</Offcanvas.Title> */}
         </Offcanvas.Header>
         <Offcanvas.Body className="bg-dark text-white">
           <Button
