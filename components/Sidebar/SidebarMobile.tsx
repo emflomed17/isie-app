@@ -54,9 +54,7 @@ const SidebarMobile = () => {
           closeLabel="Close"
           closeVariant="white"
           className="bg-dark close-offset-btn"
-        >
-          {/* <Offcanvas.Title className="text-white">Anest Iwata</Offcanvas.Title> */}
-        </Offcanvas.Header>
+        ></Offcanvas.Header>
         <Offcanvas.Body className="bg-dark text-white">
           <Button
             variant="outline-light"

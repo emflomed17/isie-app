@@ -188,10 +188,13 @@ body {
 }
 
 .form-input {
-  height: 60px;
+  // height: 60px;
   background-color: rgba(64, 65, 79, 1);
   color: rgba(255, 255, 255, 0.501);
   border: none;
+  resize: none;
+  padding: 1rem;
+  max-height: 200px;
 }
 
 .form-input:focus {
@@ -218,18 +221,13 @@ body {
 }
 
 .input-group-text {
-  background-color: rgba(
-    64,
-    65,
-    79,
-    1
-  ); /* Background color for the icon container */
-  border: none; /* Remove border from the icon container */
+  background-color: rgba(64, 65, 79, 1);
+  border: none;
 }
 
 .input-group-text {
-  font-size: 20px; /* Adjust the icon size as needed */
-  color: rgba(255, 255, 255, 0.501); /* Adjust the icon color as needed */
+  font-size: 20px;
+  color: rgba(255, 255, 255, 0.501);
   padding: 0;
   padding-left: 1px;
   z-index: 2;
@@ -252,7 +250,8 @@ body {
 .chat-message-container {
   padding-bottom: 24px;
   padding-top: 20px;
-  // max-width: 48rem;
+  max-width: 46rem;
+  padding-left: 2rem;
 }
 
 .chat-icon-column {
@@ -306,25 +305,10 @@ body {
   background-color: rgb(68, 70, 84);
 }
 
-// .header-chat.visible {
-//   // transform: translateY(0%);
-// }
-
-// .header-chat.hidden {
-//   transform: translateY(-100%);
-// }
-
 .header-p {
   color: rgba(255, 255, 255, 0.7);
   font-size: small;
 }
-
-// @media (min-width: 765px) and (max-width: 1024px) {
-//   .bottom-container {
-//     max-width: 550px;
-//     // max-width: -webkit-fill-available;
-//   }
-// }
 
 @media (max-width: 767px) {
   .sidebar {
@@ -344,24 +328,5 @@ body {
   .input-chat {
     // box-shadow: none;
     background-color: rgba(52, 53, 65, 1);
-  }
-}
-
-/* Apply styles for width greater than or equal to 1025px */
-@media (min-width: 1280px) {
-  .chat-message-container {
-    max-width: 48rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .chat-message-container {
-    max-width: 38rem;
-  }
-}
-
-@media (min-width: 768px) {
-  .chat-message-container {
-    max-width: 34rem;
   }
 }

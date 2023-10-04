@@ -53,8 +53,17 @@ const UserInput = () => {
         response: response,
       });
 
+      const textarea = document.querySelector(
+        "#textArea"
+      ) as HTMLTextAreaElement;
+      if (textarea) {
+        textarea.style.height = "60px";
+      }
+
       setCurrentQuestion("");
     } catch (error: any) {
+      console.log(error.message);
+
       setErrorMessage(error.message);
       console.error(error);
     } finally {
@@ -62,21 +71,28 @@ const UserInput = () => {
     }
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    const textarea = e.target as HTMLTextAreaElement;
+    if (e.key === "Enter" && e.shiftKey) {
+      e.preventDefault();
+      textarea.value += "\n";
+      textarea.style.height = "auto";
+      textarea.style.height = textarea.scrollHeight + "px";
+      return;
+    }
     if (e.key === "Enter") {
       e.preventDefault();
       handleOnSubmit(e);
+      textarea.style.height = "60px";
     }
   };
-
-  const btnVariant = inputValue ? "secondary" : "outline-secondary";
 
   return (
     <Container className="bottom-container">
       <Row>
         <div className="input-group input-chat px-0">
-          <input
-            type="text"
+          <textarea
+            id="textArea"
             placeholder="Send a message"
             className="form-input form-control"
             autoComplete="none"
@@ -84,6 +100,7 @@ const UserInput = () => {
             value={inputValue}
             onKeyDown={handleKeyDown}
             disabled={isLoading}
+            rows={1}
           />
           <span className="input-group-text">
             <div className="d-flex justify-content-end">
@@ -91,12 +108,12 @@ const UserInput = () => {
                 <Spinner animation="grow" size="sm" className="me-2" />
               ) : (
                 <Button
-                  className="submit-btn me-2"
-                  variant={btnVariant}
+                  className={`submit-btn me-2 ${inputValue && "active"}`}
+                  variant="outline-secondary"
                   size="lg"
                   type="button"
                   onClick={handleOnSubmit}
-                  disabled={isLoading}
+                  disabled={isLoading || !inputValue}
                 >
                   <BsSendFill size="16px" />
                 </Button>
