@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, useEffect, useRef } from "react";
 import { Metadata } from "next";
 
 import QuickQuestions from "@/components/QuickQuestions/QuickQuestions";
@@ -19,7 +19,7 @@ const ChatLayout: React.FC<ChatLayoutProps> = ({ children }) => {
   return (
     <>
       <ChatHeader />
-      <div className="messages-container">{children}</div>
+      {children}
       <UserInputWrapper>
         <UserInput />
       </UserInputWrapper>

@@ -30,7 +30,8 @@ body {
 }
 
 .messages-container {
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
   height: calc(100vh - 110px);
 }
 
@@ -245,6 +246,17 @@ body {
 
 .submit-btn.active {
   background-color: #19c37d;
+}
+
+.scroll-bottom-btn {
+  position: absolute;
+  bottom: 10rem;
+  right: 2rem;
+  z-index: 2;
+  background-color: hsla(0, 0%, 100%, 0.1);
+  color: white;
+  border-radius: 16px;
+  border-color: hsla(0, 0%, 100%, 0.1);
 }
 
 .chat-message-container {
