@@ -17,7 +17,7 @@ const ErrorToast = () => {
         show={!!errorMessage}
         onClose={() => setErrorMessage("")}
         bg="danger"
-        delay={3000}
+        delay={5000}
         autohide
       >
         <ToastHeader className="toast-custom-header">

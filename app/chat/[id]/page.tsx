@@ -76,7 +76,7 @@ export default function Chat({ params }: { params: { id: string } }) {
           onClick={scrollToBottomSmoothly}
           className="scroll-bottom-btn"
         >
-          <BsArrowDown />
+          <BsArrowDown size={14} />
         </button>
       )}
       <div className="messages-container" ref={messagesContainerRef}>

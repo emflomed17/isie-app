@@ -63,9 +63,9 @@ const UserInput = () => {
       setCurrentQuestion("");
     } catch (error: any) {
       console.log(error.message);
-
-      setErrorMessage(error.message);
-      console.error(error);
+      setErrorMessage(
+        "An error has occurred in the communication with the API."
+      );
     } finally {
       setIsLoading(false);
     }
