@@ -16,12 +16,15 @@ interface ChatContextType {
   isLoading: boolean;
   currentQuestion: string;
   errorMessage: string;
+  isSidebarOpen: boolean;
   setCurrentQuestion: (value: string) => void;
   setIsLoading: (value: boolean) => void;
   createChat: ({ id, question, response }: CreateChatParams) => void;
   updateChat: ({ idToUpdate, question, response }: UpdateChatParams) => void;
   deleteChat: (chatId: string) => void;
   setErrorMessage: (value: string) => void;
+  setIsSidebarOpen: (value: boolean) => void;
+  getChatById: (id: string) => Chat | null;
 }
 
 const ChatContext = createContext<ChatContextType | undefined>(undefined);
@@ -36,6 +39,7 @@ export const ChatProvider: React.FC<ChatProviderProps> = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(true);
 
   const createChat = ({ id, question, response }: CreateChatParams) => {
     const unixDate = Date.now() / 1000;
@@ -80,6 +84,11 @@ export const ChatProvider: React.FC<ChatProviderProps> = ({ children }) => {
     setChats(newChats);
   };
 
+  const getChatById = (chatId: string): Chat | null => {
+    const filteredChats = chats.filter((item) => item.id === chatId);
+    return filteredChats.length > 0 ? filteredChats[0] : null;
+  };
+
   return (
     <ChatContext.Provider
       value={{
@@ -88,12 +97,15 @@ export const ChatProvider: React.FC<ChatProviderProps> = ({ children }) => {
         isLoading,
         currentQuestion,
         errorMessage,
+        isSidebarOpen,
         setCurrentQuestion,
         setIsLoading,
         createChat,
         updateChat,
         deleteChat,
         setErrorMessage,
+        setIsSidebarOpen,
+        getChatById,
       }}
     >
       {children}

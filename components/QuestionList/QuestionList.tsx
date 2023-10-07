@@ -15,7 +15,7 @@ const QuestionList = ({ onItemClick = () => null }: QuestionListProps) => {
 
       {chats &&
         chats.map((item) => {
-          const titleOverview = item.title.slice(0, 30);
+          const titleOverview = item.title.slice(0, 27);
           return (
             <QuestionPreview
               key={item.id}

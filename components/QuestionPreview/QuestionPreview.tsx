@@ -47,7 +47,7 @@ const QuestionPreview = ({
         <Link href={`/chat/${id}`} className="question-link" onClick={onClick}>
           <div className="link-inner-container">
             <div>
-              <BsChatLeft /> &nbsp;&nbsp;{title}
+              <BsChatLeft /> &nbsp;&nbsp;<span>{title}</span>
             </div>
           </div>
         </Link>

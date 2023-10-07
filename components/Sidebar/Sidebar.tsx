@@ -17,9 +17,11 @@ import SidebarMobile from "./SidebarMobile";
 import QuestionPreview from "../QuestionPreview/QuestionPreview";
 import QuestionList from "../QuestionList/QuestionList";
 import { useChatContext } from "@/app/ChatContext";
+import SidebarToggle from "./SidebarToggle";
 
 const Sidebar = () => {
   const router = useRouter();
+  const { isSidebarOpen, setIsSidebarOpen } = useChatContext();
 
   const handleOnNewChatClick = () => {
     router.push("/");
@@ -34,7 +36,11 @@ const Sidebar = () => {
   return (
     <>
       {isClient ? (
-        <Col sm={12} md={2} className="sidebar bg-dark">
+        <Col
+          sm={12}
+          md={2}
+          className={`sidebar bg-dark ${!isSidebarOpen && "d-none"}`}
+        >
           <Stack direction="horizontal" gap={2} className="p-2">
             <Button
               variant="outline-light"
@@ -43,6 +49,7 @@ const Sidebar = () => {
             >
               <BsPlus size="20px" /> &nbsp; New Chat
             </Button>
+            <SidebarToggle />
           </Stack>
 
           <div className=" d-none d-md-flex">

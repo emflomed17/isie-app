@@ -32,8 +32,6 @@ const MessageList = ({ messages, isValidChat }: MessageListProps) => {
     }
   }, [isValidChat, router, setErrorMessage]);
 
-  console.log(process.env.OPEN_AI_API_KEY);
-
   return (
     <>
       {isClient ? (
@@ -55,6 +53,11 @@ const MessageList = ({ messages, isValidChat }: MessageListProps) => {
               ""
             )}
           </div>
+          {/* {errorMessage && (
+            <div className="empty-space ai-bg">
+              <Message role="user" content={errorMessage} />
+            </div>
+          )} */}
         </div>
       ) : (
         <div></div>
