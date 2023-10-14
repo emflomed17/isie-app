@@ -17,8 +17,8 @@ interface DecisionModalProps {
 
 const DecisionModal = ({ isOpen, onClose, onConfirm }: DecisionModalProps) => {
   return (
-    <Modal show={isOpen} onHide={onClose}>
-      <ModalHeader closeButton>
+    <Modal show={isOpen} onHide={onClose} centered>
+      <ModalHeader>
         <Modal.Title>Delete Chat</Modal.Title>
       </ModalHeader>
       <ModalBody>Are you sure you want to delete this chat?</ModalBody>
@@ -26,7 +26,7 @@ const DecisionModal = ({ isOpen, onClose, onConfirm }: DecisionModalProps) => {
         <Button variant="secondary" onClick={onClose}>
           Cancel
         </Button>
-        <Button variant="primary" onClick={onConfirm}>
+        <Button variant="danger" onClick={onConfirm}>
           Delete
         </Button>
       </ModalFooter>

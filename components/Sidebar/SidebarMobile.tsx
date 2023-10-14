@@ -33,7 +33,7 @@ const SidebarMobile = () => {
         <Button
           variant="outline-light"
           onClick={toggleShow}
-          className="custom-button ms-2 me-2 d-md-none mb-2"
+          className="custom-button ms-2 me-2 d-md-none mb-2 border-0"
         >
           <BsList size="24px" />
         </Button>
@@ -43,7 +43,7 @@ const SidebarMobile = () => {
         <Button
           variant="outline-light"
           onClick={handleOnNewChatClick}
-          className="custom-button me-2 d-md-none mb-2"
+          className="custom-button me-2 d-md-none mb-2 border-0"
         >
           <BsPlus size="24px" />
         </Button>

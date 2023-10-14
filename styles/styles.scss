@@ -322,6 +322,19 @@ body {
   font-size: small;
 }
 
+.modal-content {
+  background-color: rgba(32, 33, 35, 1);
+  color: #d1d5db;
+}
+
+.modal-header {
+  border-bottom: 0.5px solid #444547;
+}
+
+.modal-footer {
+  border-top: none;
+}
+
 @media (max-width: 767px) {
   .sidebar {
     width: 100%;
