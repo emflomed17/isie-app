@@ -1,3 +1,4 @@
+import { mapOpenAIError } from "@/utils/errorHandler";
 import { ChatCompletion } from "@/utils/types";
 
 interface ChatInteraction {
@@ -14,7 +15,10 @@ export const interactWithChat = async ({
   const response = await openAiApi(message);
 
   if (!response.ok) {
-    throw new Error("Something went wrong. Please try again.");
+    const errorData = await response.json();
+    const errorMessage = mapOpenAIError(errorData.error.code);
+
+    throw new Error(errorMessage);
   }
 
   const responseData = await response.json();
