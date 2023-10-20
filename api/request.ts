@@ -3,14 +3,12 @@ import { ChatCompletion } from "@/utils/types";
 
 interface ChatInteraction {
   message: string;
-  isNewInteraction?: boolean;
 }
 
-const API_KEY = "API_KEY_HERE";
+const API_KEY = process.env.NEXT_PUBLIC_IWATA_OPEN_AI_API_KEY;
 
 export const interactWithChat = async ({
   message,
-  isNewInteraction = true,
 }: ChatInteraction): Promise<ChatCompletion> => {
   const response = await openAiApi(message);
 

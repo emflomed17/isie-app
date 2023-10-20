@@ -36,7 +36,8 @@ interface QuestionProps {
 
 const Question = ({ title, subtitle }: QuestionProps) => {
   const router = useRouter();
-  const { createChat, setIsLoading, setCurrentQuestion } = useChatContext();
+  const { createChat, setIsLoading, setCurrentQuestion, setErrorMessage } =
+    useChatContext();
 
   const questionText = `${title} ${subtitle}`;
 
@@ -51,8 +52,9 @@ const Question = ({ title, subtitle }: QuestionProps) => {
       createChat({ id: chatId, question: questionText, response });
       setCurrentQuestion("");
       router.push(`/chat/${chatId}`);
-    } catch (error) {
+    } catch (error: any) {
       console.error(error);
+      setErrorMessage(error.message);
     } finally {
       setIsLoading(false);
     }
