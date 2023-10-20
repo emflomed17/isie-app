@@ -1,5 +1,5 @@
 "use client";
-import React, { FormEventHandler, useRef, useState } from "react";
+import React, { FormEventHandler, useEffect, useRef, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { v4 as uuidv4 } from "uuid";
 import { Button, Container, Row, Spinner } from "../../lib/react-bootstrap";
@@ -63,9 +63,7 @@ const UserInput = () => {
       setCurrentQuestion("");
     } catch (error: any) {
       console.log(error.message);
-      setErrorMessage(
-        "An error has occurred in the communication with the API."
-      );
+      setErrorMessage(error.message);
     } finally {
       setIsLoading(false);
     }
@@ -87,6 +85,15 @@ const UserInput = () => {
     }
   };
 
+  useEffect(() => {
+    const textarea = document.querySelector("#textArea") as HTMLTextAreaElement;
+    if (textarea) {
+      textarea.style.height = "auto";
+      textarea.style.height = textarea.scrollHeight + "px";
+      console.log("Here");
+    }
+  }, [inputValue]);
+
   return (
     <Container className="bottom-container">
       <Row>
@@ -103,7 +110,7 @@ const UserInput = () => {
             rows={1}
           />
           <span className="input-group-text">
-            <div className="d-flex justify-content-end">
+            <div className="d-flex justify-content-end align-self-end pb-3 pt-3">
               {isLoading ? (
                 <Spinner animation="grow" size="sm" className="me-2" />
               ) : (

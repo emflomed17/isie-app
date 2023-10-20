@@ -16,7 +16,7 @@ const ImageConfigByRole: Record<string, Record<string, string>> = {
   assistant: {
     path: "/iwatan.png",
     height: "40",
-    width: "40",
+    width: "30",
   },
 };
 

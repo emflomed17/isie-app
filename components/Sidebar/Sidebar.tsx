@@ -41,10 +41,14 @@ const Sidebar = () => {
           md={2}
           className={`sidebar bg-dark ${!isSidebarOpen && "d-none"}`}
         >
-          <Stack direction="horizontal" gap={2} className="p-2">
+          <Stack
+            direction="horizontal"
+            gap={2}
+            className="d-none d-md-flex p-2"
+          >
             <Button
               variant="outline-light"
-              className="custom-button new-chat-btn d-none d-md-flex mt-3"
+              className="custom-button new-chat-btn mt-3"
               onClick={handleOnNewChatClick}
             >
               <BsPlus size="20px" /> &nbsp; New Chat
