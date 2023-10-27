@@ -1,12 +1,15 @@
 "use client";
 import { useChatContext } from "@/app/ChatContext";
+import ChatHeader from "@/components/ChatHeader/ChatHeader";
 import MessageList from "@/components/MessageList/MessageList";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { BsArrowDown } from "react-icons/bs";
 
 export default function Chat({ params }: { params: { id: string } }) {
   const { chats } = useChatContext();
   const [showScrollButton, setShowScrollButton] = useState(false);
+  const [isScrollingDown, setIsScrollingDown] = useState(true);
+  const [prevScrollTop, setPrevScrollTop] = useState(0);
 
   const currentChat = chats.filter((item) => item.id === params.id);
   const messages =
@@ -18,15 +21,27 @@ export default function Chat({ params }: { params: { id: string } }) {
 
   const messagesContainerRef = useRef<HTMLDivElement>(null);
 
-  const handleScroll = () => {
-    if (messagesContainerRef.current) {
-      const isAtBottom =
-        messagesContainerRef.current.scrollHeight -
-          messagesContainerRef.current.scrollTop ===
-        messagesContainerRef.current.clientHeight;
-      setShowScrollButton(!isAtBottom);
+  const handleScroll = useCallback(() => {
+    {
+      if (messagesContainerRef.current) {
+        const scrollTop = messagesContainerRef.current.scrollTop;
+
+        const isAtBottom =
+          messagesContainerRef.current.scrollHeight -
+            messagesContainerRef.current.scrollTop ===
+          messagesContainerRef.current.clientHeight;
+
+        setShowScrollButton(!isAtBottom);
+
+        if (scrollTop > prevScrollTop) {
+          setIsScrollingDown(false);
+        } else {
+          setIsScrollingDown(true);
+        }
+        setPrevScrollTop(scrollTop);
+      }
     }
-  };
+  }, [prevScrollTop]);
 
   useEffect(() => {
     const scrollDelay = setTimeout(() => {
@@ -34,6 +49,14 @@ export default function Chat({ params }: { params: { id: string } }) {
     }, 200);
 
     return () => clearTimeout(scrollDelay);
+  }, []);
+
+  useEffect(() => {
+    const showHeaderDelay = setTimeout(() => {
+      setIsScrollingDown(true);
+    }, 250);
+
+    return () => clearTimeout(showHeaderDelay);
   }, []);
 
   useEffect(() => {
@@ -48,7 +71,7 @@ export default function Chat({ params }: { params: { id: string } }) {
         containerRef.removeEventListener("scroll", handleScroll);
       }
     };
-  }, []);
+  }, [handleScroll]);
 
   const scrollToBottom = () => {
     if (messagesContainerRef.current) {
@@ -70,6 +93,7 @@ export default function Chat({ params }: { params: { id: string } }) {
 
   return (
     <>
+      {isScrollingDown && <ChatHeader />}
       {showScrollButton && (
         <button
           type="button"
